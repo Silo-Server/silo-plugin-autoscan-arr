@@ -3,7 +3,7 @@ module github.com/Silo-Server/silo-plugin-autoscan-arr
 go 1.26.3
 
 require (
-	github.com/Silo-Server/silo-plugin-sdk v0.4.1-0.20260603030807-807b07e785b2
+	github.com/Silo-Server/silo-plugin-sdk v0.10.0
 	github.com/hashicorp/go-plugin v1.8.0
 )
 

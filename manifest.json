@@ -3,6 +3,19 @@
   "version": "0.1.0",
   "checksum": "__CHECKSUM__",
   "silo_api_version": "v1",
+  "presentation": {
+    "display_name": "Sonarr & Radarr Autoscan",
+    "summary": "Detect imports and renames in Sonarr or Radarr and queue targeted Silo scans.",
+    "description_markdown": "Polls recent Sonarr and Radarr history for completed imports and file renames. It returns the affected paths to Silo so the host can apply path rewrites, deduplicate work, and scan only the relevant library locations.",
+    "setup_markdown": "Install the plugin, then create an Autoscan source in Silo using a Sonarr or Radarr connection. Configure any path rewrites on the Silo source. The plugin stores no credentials and has no separate global configuration.",
+    "homepage_url": "https://github.com/Silo-Server/silo-plugin-autoscan-arr",
+    "source_url": "https://github.com/Silo-Server/silo-plugin-autoscan-arr",
+    "support_url": "https://github.com/Silo-Server/silo-plugin-autoscan-arr/issues",
+    "changelog_url": "https://github.com/Silo-Server/silo-plugin-autoscan-arr/releases",
+    "publisher_name": "Silo",
+    "publisher_url": "https://github.com/Silo-Server",
+    "license_spdx": "NOASSERTION"
+  },
   "supported_platforms": [
     {
       "os": "linux",
