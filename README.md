@@ -1,4 +1,4 @@
-# silo-plugin-autoscan-arr
+# silo-plugins-autoscan-arr
 
 A Silo plugin that implements the **`scan_source.v1`** capability for **Sonarr / Radarr**.
 When Silo's host polls it, the plugin reads the arr instance's recent history,
