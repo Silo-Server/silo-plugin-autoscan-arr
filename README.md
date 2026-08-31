@@ -1,6 +1,7 @@
-# silo-plugin-autoscan-arr
+# Sonarr & Radarr Autoscan Plugin for Silo
 
-A Silo plugin that implements the **`scan_source.v1`** capability for **Sonarr / Radarr**.
+A [Silo](https://github.com/Silo-Server/silo-server) plugin that implements the
+**`scan_source.v1`** capability for **Sonarr and Radarr**.
 When Silo's host polls it, the plugin reads the arr instance's recent history,
 extracts imported and renamed file paths, and hands the **raw arr-side paths** back to
 the host. The host applies any configured path rewrites and triggers targeted library
@@ -22,9 +23,11 @@ each tick. The plugin:
    `movieFileRenamed` (both the new and old path). Deletes are ignored — upgrade
    deletes are covered by the paired import.
 4. Returns the **raw arr-side paths** in `PollChangesResponse.source_paths` plus an
-   opaque `next_marker` (a composite `<RFC3339>|<id>` cursor that never regresses
-   below the caller's marker; a bare RFC3339 string is still accepted for backward
-   compatibility). **Path rewrites are applied by the host**, not the plugin.
+   opaque `next_marker` (a composite `<RFC3339>|<id>` cursor; a bare RFC3339
+   string is still accepted for backward compatibility). Markers normally move
+   forward, but a future-dated marker is clamped to the current time so clock skew
+   cannot suppress new events. **Path rewrites are applied by the host**, not the
+   plugin.
 
 ## Configuration
 
@@ -43,10 +46,13 @@ go test ./...       # unit tests
 go test -tags integration ./...   # spawns the real binary over go-plugin gRPC
 ```
 
-## Status
+## Compatibility
 
-Depends on `silo-plugin-sdk` ≥ the release that adds `scan_source.v1` with the
-`connection` field on `PollChangesRequest` and `source_paths` on `PollChangesResponse`.
-`go.mod` depends on the SDK via a pseudo-version (no local `replace`); bump it to a
-tagged release once one is published. Catalog registration in `silo-plugins` is a
-separate step.
+The plugin consumes `silo-plugin-sdk` as a tagged Go module dependency. Local
+multi-repository work may use `go.work`, but release and CI builds run with
+`GOWORK=off`; do not commit a local filesystem `replace` directive.
+
+## Contributing
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Capability
+contract changes must be coordinated with `silo-plugin-sdk` and `silo-server`.
