@@ -52,6 +52,11 @@ The plugin consumes `silo-plugin-sdk` as a tagged Go module dependency. Local
 multi-repository work may use `go.work`, but release and CI builds run with
 `GOWORK=off`; do not commit a local filesystem `replace` directive.
 
+## Releases
+
+Releases are signed with GitHub artifact attestations. [CONTRIBUTING.md](CONTRIBUTING.md#release)
+describes how maintainers cut a release and how to verify a downloaded binary.
+
 ## Contributing
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Capability
