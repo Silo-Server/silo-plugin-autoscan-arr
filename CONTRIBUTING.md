@@ -54,6 +54,12 @@ them with GitHub artifact attestations, publishes the GitHub release, and asks
 the [`silo-plugins`](https://github.com/Silo-Server/silo-plugins) catalog to
 pick it up. There is no manual-dispatch release.
 
+The catalog is notified only for a full release, and only when this repository
+has the `SILO_PLUGINS_DISPATCH_TOKEN` secret. A prerelease tag (`vX.Y.Z-rc.1`)
+publishes a GitHub prerelease and skips the notification. If the notification
+failed or was skipped, set the secret and re-run the release run's
+`Notify the silo-plugins catalog` job.
+
 1. Open a pull request that sets `version` in `manifest.json` to the new
    version (for example `0.1.3`), and merge it.
 2. Tag the commit that pull request put on `main` and push the tag. Tag that
@@ -90,5 +96,5 @@ from GitHub, add `--bundle plugin.sigstore.json`; `gh` still fetches Sigstore's
 trusted root unless you follow GitHub's
 [offline verification steps](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/verify-attestations-offline).
 Verify before running a downloaded binary.
-`sha256sum plugin-linux-amd64` must also match the binary's line in
-`checksums.txt`.
+`sha256sum plugin-linux-amd64` (`shasum -a 256` on macOS) must also match the
+binary's line in `checksums.txt`.
