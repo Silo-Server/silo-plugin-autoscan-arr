@@ -1,7 +1,7 @@
 .PHONY: build test lint clean build-all
 
 BINARY=plugin
-PLATFORMS=linux/amd64 linux/arm64 darwin/arm64
+PLATFORMS=linux/amd64 linux/arm64 darwin/arm64 freebsd/amd64 freebsd/arm64
 VERSION ?= $(shell git describe --tags --always 2>/dev/null | sed 's/^v//')
 LDFLAGS=-s -w -X main.version=$(VERSION)
 
